@@ -116,16 +116,21 @@ int main(){
             break;
         } else {
             std::string token = command.substr(0, command.find(" "));
-            int index = stoi(command.substr(command.find(" ") + 1, command.length()));
             if (token == "SEARCH") {
-                if ((index >= 0 && index < 8 && isFull) || (index <= number_friends) ){
-                    if ((number_friends == 0 && isFull) || number_friends > 0) {
-                        showInfoWithIndex(contact, index);
+                std::string indice = command.substr(command.find(" ") + 1, command.length());
+                try {
+                    int index = stoi(command.substr(command.find(" ") + 1, command.length()));
+                    if ((index >= 0 && index < 8 && isFull) || (index <= number_friends) ){
+                        if ((number_friends == 0 && isFull) || number_friends > 0) {
+                            showInfoWithIndex(contact, index);
+                        } else {
+                            std::cout << "Error buscando la informacion." << std::endl;     
+                        }
                     } else {
-                        std::cout << "Error buscando la informacion." << std::endl;     
+                        std::cout << "Error buscando la informacion." << std::endl; 
                     }
-                } else {
-                    std::cout << "Error buscando la informacion." << std::endl; 
+                } catch(...) {
+                 std::cout << "Parametro no valido." << std::endl;   
                 }
             } else {
             std::cout << "Comand not found." << std::endl;
