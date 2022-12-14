@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "../include/contact.hpp"
+#include "../include/Contact.hpp"
 
 Contact addContact(){
     Contact contact;
@@ -34,7 +34,7 @@ void search_friends(Contact contacts[8], int number_friends, bool isFull){
     isFull ? loop_number = 8 : loop_number = number_friends;
     std::cout << "Indice    |Nombre    |Apellido  |Apodo     "<< std::endl;
     for (int i = 0; i < loop_number; i++){
-        std::cout <<  i;
+        std::cout <<  i + 1;
         std::cout <<  "         |";
         std::string str(contacts[i].get_first_name());
         if (contacts[i].get_first_name().length() <= 10){
@@ -84,11 +84,11 @@ void search_friends(Contact contacts[8], int number_friends, bool isFull){
 
 
 void    showInfoWithIndex(Contact contacts[8], int index){
-    std::cout << "Name: " << contacts[index].get_first_name() << std::endl;
-    std::cout << "Last name: " << contacts[index].get_last_name() << std::endl;
-    std::cout << "Nickname: " << contacts[index].get_nickname() << std::endl;
-    std::cout << "Telephone: " << contacts[index].get_phone() << std::endl; 
-    std::cout << "Darkest secret: " << contacts[index].get_darkest_secret() << std::endl;
+    std::cout << "Name: " << contacts[index - 1].get_first_name() << std::endl;
+    std::cout << "Last name: " << contacts[index - 1].get_last_name() << std::endl;
+    std::cout << "Nickname: " << contacts[index - 1].get_nickname() << std::endl;
+    std::cout << "Telephone: " << contacts[index - 1].get_phone() << std::endl; 
+    std::cout << "Darkest secret: " << contacts[index - 1].get_darkest_secret() << std::endl;
 }
 
 int main(){
@@ -96,18 +96,19 @@ int main(){
     int number_friends;
     std::string command;
     bool isFull = false;
+    
     number_friends = 0;
     while(42)
     {
         std::cout << "Introduce el comando de la agenda:";
         std::getline(std::cin, command);
         if (command == "ADD"){
+        if (number_friends == 8){
+            number_friends = 0;
+            isFull = true;
+        }
             contact[number_friends] = addContact();
             number_friends++;
-            if (number_friends == 9){
-                number_friends = 0;
-                isFull = true;
-            }
         } else if (command == "SEARCH"){
             search_friends(contact, number_friends, isFull);
         }
