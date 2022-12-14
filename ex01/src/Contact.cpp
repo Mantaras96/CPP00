@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amantara <amantara@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/14 19:46:44 by amantara          #+#    #+#             */
+/*   Updated: 2022/12/14 19:46:51 by amantara         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../include/contact.hpp"
+#include "../include/Contact.hpp"
 
 std::string Contact::get_first_name() const {
     return (this->first_name);

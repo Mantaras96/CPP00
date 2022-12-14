@@ -4,7 +4,7 @@ SRCS_DIR = ./src/
 SRCS =	Contact.cpp \
 		main.cpp
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 OBJS_DIR 	= 	objects/
 OBJ 		= 	$(SRCS:.cpp=.o)

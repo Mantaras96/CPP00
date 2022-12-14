@@ -1,9 +1,9 @@
 NAME = megaphone
 
 SRCS_DIR = ./
-SRCS = megaphone.cpp
+SRCS = Megaphone.cpp
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 OBJS_DIR 	= 	objects/
 OBJ 		= 	$(SRCS:.cpp=.o)
