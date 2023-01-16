@@ -1,28 +1,44 @@
+
 NAME = phonebook
 
-SRCS_DIR = ./src/
-SRCS =	Contact.cpp \
-		main.cpp
+SRC_DIR = src
+OBJ_DIR = obj
+INC_DIR = include
 
-FLAGS = -Wall -Wextra -Werror -std=c++98
+SRC =		main.cpp \
+			Contact.cpp \
+			PhoneBook.cpp
 
-OBJS_DIR 	= 	objects/
-OBJ 		= 	$(SRCS:.cpp=.o)
-OBJS 		= 	$(addprefix $(OBJS_DIR), $(OBJ))
+HEADER = PhoneBook.hpp Contact.hpp
 
-$(OBJS_DIR)%.o :	$(SRCS_DIR)%.cpp
-	@mkdir -p $(OBJS_DIR)
-	@c++ $(FLAGS) -c $< -o $@
+SRC := $(SRC:%=$(SRC_DIR)/%)
+OBJS = ${SRC:$(SRC_DIR)%.cpp=$(OBJ_DIR)%.o}
+# OBJS := $(OBJS:%=$(OBJ_DIR)/%)
+DEP = ${OBJS:.o=.d}
+HEADER := $(HEADER:%=$(INC_DIR)/%)
 
-$(NAME): $(OBJS)
-	@c++ $(FLAGS) -o $(NAME) $(OBJS)
 
-all: $(NAME)
+CC = c++
+CFLAG = -Wall -Wextra -Werror -std=c++98 -MMD
+RM = rm -rf
+
+${OBJ_DIR}/%.o: ${SRC_DIR}/%.cpp
+	@mkdir -p ${OBJ_DIR}
+	$(CC) $(CFLAG) -c $< -o $@
+
+${NAME}:	${OBJS}
+			${CC} ${CFLAG} ${SRC} -o ${NAME}
+
+all:		${NAME}
+
+-include ${DEP}
 
 clean:
-	@rm -rf $(OBJS_DIR)
+			@${RM} ${OBJ_DIR}
 
-fclean: clean
-	@rm -f $(NAME)
+fclean:		clean
+			@${RM} ${NAME} ${NAME}.d
 
-re: fclean all
+re:			fclean all
+
+.PHONY: all clean fclean re
